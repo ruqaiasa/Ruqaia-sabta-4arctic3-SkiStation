@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.skistation.entity.Skier;
+import tn.esprit.skistation.enums.TypeCourse;
+import tn.esprit.skistation.enums.TypeSubscription;
 import tn.esprit.skistation.services.ISkierService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -42,4 +45,32 @@ public class SkierController {
         return skierService.addSkierAndAssignToCourse(skier, numCourse);
     }
 
+
+
+
+    @PutMapping("/update")
+    public Skier updateSkier(@RequestBody Skier skier) {
+        return skierService.updateSkier(skier);
+    }
+
+    @PutMapping("/assignToPiste/{numSkier}/{numPiste}")
+    public void assignSkier(@PathVariable Long numSkier,@PathVariable Long numPiste) {
+        skierService.assignSkierToPiste(numSkier, numPiste);
+    }
+    @GetMapping("/get/{firstName}/{lastName}")
+    public Skier getByFLname(@PathVariable String firstName, @PathVariable String lastName) {
+        return skierService.getByFirstAndLastName(firstName, lastName);
+    }
+    @GetMapping("/getByDob/{dob}")
+    public List<Skier> getByDob(@PathVariable LocalDate dob) {
+        return skierService.getByDateOfBirth(dob);
+    }
+    @GetMapping("/getskier/subscription/{subscriptionType}")
+    List<Skier> retrieveSkiersBySubscriptionType(@PathVariable TypeSubscription subscriptionType){
+        return skierService.retrieveSkiersBySubscriptionType(subscriptionType);
+    }
+    @GetMapping("/getskier/cours/{typeCourse}")
+    List<Skier> getSkierByTypeCourse(@PathVariable TypeCourse typeCourse){
+        return skierService.getSkierByTypeCourse(typeCourse);
+    }
 }

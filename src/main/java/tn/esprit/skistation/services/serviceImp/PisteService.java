@@ -19,7 +19,7 @@ public class PisteService implements IPisteService {
     private final SkierRepository skierRepository;
 
     public List<Piste> retrieveAllPistes() {
-        return repository.findAll();
+        return (List<Piste>) repository.findAll();
     }
     public Piste addPiste(Piste piste) {
         return repository.save(piste);
@@ -38,6 +38,12 @@ public class PisteService implements IPisteService {
             piste.getSkiers().add(skier);
             return repository.save(piste);
         }
+
+
         return null;
+    }
+    @Override
+    public void removePiste(Long numPiste) {
+        repository.deleteById(numPiste);
     }
 }

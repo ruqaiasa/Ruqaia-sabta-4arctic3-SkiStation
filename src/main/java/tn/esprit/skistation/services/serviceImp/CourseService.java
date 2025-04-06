@@ -27,4 +27,8 @@ public class CourseService implements ICourseService {
         return repository.findById(numCourse).orElse(null);
     }
 
+    @Override
+    public void removeCourse(Long numCourse) {
+        repository.deleteById(numCourse);
+    }
 }

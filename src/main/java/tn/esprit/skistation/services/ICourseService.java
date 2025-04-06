@@ -9,4 +9,5 @@ public interface ICourseService {
     Course addCourse(Course course);
     Course updateCourse(Course course);
     Course retrieveCourse(Long numCourse);
+    public void removeCourse(Long numCourse);
 }
